@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/back-end-test-motum.iml" filepath="$PROJECT_DIR$/.idea/back-end-test-motum.iml" />
-      <module fileurl="file://$PROJECT_DIR$/brayan-barojaspython/brayan-barojaspython.iml" filepath="$PROJECT_DIR$/brayan-barojaspython/brayan-barojaspython.iml" />
     </modules>
   </component>
 </project>

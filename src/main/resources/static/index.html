@@ -1,0 +1,117 @@
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    margin:40px;
+    text-align:center;
+}
+
+input{
+    padding:10px;
+    width:250px;
+}
+
+button{
+    padding:10px 20px;
+    cursor:pointer;
+}
+
+#resultado{
+    margin-top:20px;
+}
+
+ul{
+    list-style:none;
+    padding:0;
+}
+
+li{
+    background:#f2f2f2;
+    margin:5px;
+    padding:10px;
+    border-radius:5px;
+}
+
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon API</title>
+</head>
+
+<body>
+
+<h1>Consultar Pokémon</h1>
+
+<form id="pokemonForm">
+
+    <input
+        type="text"
+        id="nombrePokemon"
+        placeholder="Ejemplo: pikachu"
+        required>
+
+    <button type="submit">
+        Buscar
+    </button>
+
+</form>
+
+<div id="resultado"></div>
+
+<script>
+
+document.getElementById("pokemonForm")
+.addEventListener("submit", async function(event){
+
+    event.preventDefault();
+
+    const nombre =
+        document.getElementById("nombrePokemon")
+        .value
+        .toLowerCase();
+
+    const resultado =
+        document.getElementById("resultado");
+
+    resultado.innerHTML = "Buscando...";
+
+    try{
+
+        const response =
+            await fetch(`/pokemon/${nombre}`);
+
+        if(!response.ok){
+            throw new Error("Pokemon no encontrado");
+        }
+
+        const data =
+            await response.json();
+
+        let html = `
+            <h2>${data.pokemon}</h2>
+            <h3>Abilities</h3>
+            <ul>
+        `;
+
+        data.abilities.forEach(ability => {
+            html += `<li>${ability}</li>`;
+        });
+
+        html += "</ul>";
+
+        resultado.innerHTML = html;
+
+    }catch(error){
+
+        resultado.innerHTML =
+        `<p>${error.message}</p>`;
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
